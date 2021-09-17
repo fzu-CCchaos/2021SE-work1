@@ -102,14 +102,6 @@ elif complete_level == '3':
         print(i, end=' ')
     print()
     print("if-else num: ", get_ifelse_num(file_path))
-elif complete_level == '4':
-    print("total num: ", get_total_num(file_path)[0])
-    print("switch num: ", get_total_num(file_path)[1])
-    print("case num:", end=" ")
-    for i in get_case_num(file_path):
-        print(i, end=' ')
-    print()
-    print("if-else num: ", get_ifelse_num(file_path))
 
-elif complete_level > 4 or complete_level < 1:
+elif complete_level > '4' or complete_level < '1':
     print("Treatment level is out of range,the range is from 1 to 4")
