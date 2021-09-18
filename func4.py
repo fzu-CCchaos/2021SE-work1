@@ -23,8 +23,8 @@ with open(file_name,'r') as f:
 
 if_elif_total = 0
 flag_else = 0  # 用来记录当前有多少个else
-flag_elif = 0  # 用来记录当前是否已经有一个else if
-num_of_elif = 0
+flag_elif = 0  # 用来记录当前总的else if数量
+num_of_elif = 0  # 用来记录当前这个结构中 else if的数量
 
 if_elif_num.reverse()  # 将list倒序
 for i in range(len(if_elif_num)):
