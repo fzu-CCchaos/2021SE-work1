@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import string
 import os
 import re
@@ -47,12 +48,15 @@ def get_case_num(filename):
     case_num = []
     case_num_list = []
     with open(filename, 'r') as f:
-        for line in f:
-            line1 = line.strip().split('\n')
-            line2 = ''.join(line1)  # 将list转为string
-            if line2.find("switch") != -1:
+        article_lines = f.readlines()
+        for line in article_lines:
+            line=line.replace(",","").replace(".","").replace("{"," ").replace("}"," ") \
+                .replace(":","").replace(";","").replace("?","").replace("("," ").replace(")"," ")
+            line = re.sub("//.*", "", line)
+            line1=''.join(line)
+            if line1.find("switch")!=-1:
                 case_num.append('1')
-            elif line2.find("case") != -1:
+            elif line1.find("case")!=-1:
                 case_num.append('2')
     i = 0
     num_of_case = 0
@@ -71,18 +75,22 @@ def get_case_num(filename):
 def get_ifelse_num(filename):
     if_else_num = []
     with open(filename,'r') as f:
-        for line in f:
-            line1 = line.strip().split('\n')
-            line2 = ''.join(line1)
-            if line2.find("else if") != -1:
+        article_lines = f.readlines()
+        for line in article_lines:
+            line=line.replace(",","").replace(".","").replace("{"," ").replace("}"," ") \
+                .replace(":","").replace(";","").replace("?","").replace("("," ").replace(")"," ")
+            line = re.sub("//.*", "", line)
+            line1 = ''.join(line)
+            if line1.find("else if") != -1:
                 if_else_num.append('0')
-            elif line2.find("if") != -1:
+            elif line1.find("if") != -1:
                 if_else_num.append('1')
-            elif line2.find("else") != -1:
+            elif line1.find("else") != -1:
                 if_else_num.append('2')
             else:
                 continue
-    if_else_total=0
+
+    if_else_total = 0
     for i in range(len(if_else_num)):
         if if_else_num[i] == '1' and if_else_num[i+1] == '2':
             if_else_total += 1
